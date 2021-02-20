@@ -55,13 +55,6 @@ public class Store {
 				int itemNo = sc.nextInt();
 				cart.removeItem(allItems.get(itemNo));
 			}
-		}
-		
-		
-		
-		
-		
-		
-		
+		}	
 	}
 }
