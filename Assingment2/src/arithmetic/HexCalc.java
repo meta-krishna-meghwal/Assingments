@@ -90,7 +90,7 @@ public class HexCalc {
 		return answer;
 	}
 	public boolean equalsTo(String number1,String number2){		
-		return number1 == number2;
+		return number1.equals(number2);
 	}
 	public static void main(String[] args){
 		
