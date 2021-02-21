@@ -64,21 +64,46 @@ public final class Poly {
 	
 	public static Poly multiplyPoly(Poly p1, Poly p2){
 		
-		Integer[] p1Powers = p1.getPowers();
 		int p1Degree = p1.degree();
 		int p2Degree = p2.degree();
 		int p1Length = p1.length();
 		int p2Length = p2.length();
+		
+		Integer[] p1Powers = p1.getPowers();
 		Integer[] p1Coeffs = p1.getCoeffs();
 		Integer[] p2Powers = p1.getPowers();
 		Integer[] p2Coeffs = p1.getCoeffs();
-		int newLength = p1Length + p2Length + 1;
+		
+		int newLength = p1Degree + p1Degree + 1;
+		
+		Integer[] newP1 = new Integer[p1Degree + 1];
+		Integer[] newP2 = new Integer[p2Degree + 1];
 		Integer[] newCoeffs = new Integer[newLength];
-		Integer[] newPowers = new Integer[newLength];
 		
+		for(int i=0; i < p1Length; i++){
+			newP1[p1Powers[i]] = p1Coeffs[i];
+		}
 		
-		return p2;
+		for(int i=0; i < p2Length; i++){
+			newP2[p2Powers[i]] = p2Coeffs[i];
+		}
+		for(int i=0;i<newLength;i++)
+		{
+			newCoeffs[i] = 0;
+		}
+		for (int i=0; i<p1Degree+1; i++) 
+		{ 
+		  for (int j=0; j<p2Degree+1; j++) 
+			  newCoeffs[i + j] += newP1[i]*newP2[j]; 
+		} 
+		HashMap<Integer,Integer> answerMap = new HashMap<Integer,Integer>();
+
+		for(int i=0; i < newLength; i++){
+			answerMap.put(i,newCoeffs[i]);
+		}
 		
+		Poly p = new Poly(answerMap);
+		return p;
 	}
 	public static Poly addPoly(Poly p1, Poly p2){
 				
@@ -142,10 +167,10 @@ public final class Poly {
 		
 		Poly p1 = new Poly(hmap);
 		Poly p2 = new Poly(hmap);
-//		Poly p = Poly.addPoly(p1, p2);
-		Poly p	= Poly.multiplyPoly(Poly p1, Poly p2)
+		
+		Poly p	= Poly.multiplyPoly(p1, p2);
 		Integer [] temp = p.getCoeffs();
-		System.out.println(temp[1]);
+		System.out.println(temp[0]);
 	}
 
 
