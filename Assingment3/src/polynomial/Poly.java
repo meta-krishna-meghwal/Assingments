@@ -50,16 +50,27 @@ public final class Poly {
 		return result;
 	}
 	public Integer[] getPowers(){
-		return this.powers;
+		Integer[] tempPowers = new Integer[this.length];
+		
+		for(int i=0; i < this.length; i++){
+			tempPowers[i] = this.powers[i];
+		}
+		return tempPowers;
 	}
 	public int degree(){
 		return this.degree;
 	}
 	public int length(){
+		
 		return this.length;
 	}
 	public Integer[] getCoeffs(){
-		return this.coefficients;
+		Integer[] tempCoeffs = new Integer[this.length];
+		
+		for(int i=0; i < this.length; i++){
+			tempCoeffs[i] = this.coefficients[i];		
+			}
+		return tempCoeffs;
 	}
 	
 	public static Poly multiplyPoly(Poly p1, Poly p2){
@@ -87,10 +98,12 @@ public final class Poly {
 		for(int i=0; i < p2Length; i++){
 			newP2[p2Powers[i]] = p2Coeffs[i];
 		}
+		
 		for(int i=0;i<newLength;i++)
 		{
 			newCoeffs[i] = 0;
 		}
+		
 		for (int i=0; i<p1Degree+1; i++) 
 		{ 
 		  for (int j=0; j<p2Degree+1; j++) 
