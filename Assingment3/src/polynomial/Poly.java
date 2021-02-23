@@ -64,6 +64,7 @@ public final class Poly {
 		
 		return this.length;
 	}
+	
 	public Integer[] getCoeffs(){
 		Integer[] tempCoeffs = new Integer[this.length];
 		
