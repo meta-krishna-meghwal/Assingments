@@ -13,7 +13,7 @@ public class JobScheduler {
 	public int[] completionTime(){
 		int [] completion = new int[this.length];
 		
-		int lastExecutedTime=0;
+		int lastExecutedTime=0; 
 		for(int i=0;i<this.length;i++){
 			
 			if(this.processes[i][0] > lastExecutedTime)
@@ -103,13 +103,18 @@ public class JobScheduler {
 		return MaxWait;
 		
 	}
-	public static void main(){
+	
+	public static void main(String[] args){
 		
-		int [][] processes = {{0,10},{6,20},{60,10},{110,5}};
+		int [][] processes = {{0,5},{10,20},{21,10}};
 		
 		JobScheduler p = new JobScheduler(processes);
 		
-		p.completionTime();
+		int [] c = p.completionTime();
+		
+		for(int i:c){
+			System.out.println(i);
+		}
 
 	}
 
