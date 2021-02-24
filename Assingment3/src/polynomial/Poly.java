@@ -110,6 +110,7 @@ public final class Poly {
 		  for (int j=0; j<p2Degree+1; j++) 
 			  newCoeffs[i + j] += newP1[i]*newP2[j]; 
 		} 
+		
 		HashMap<Integer,Integer> answerMap = new HashMap<Integer,Integer>();
 
 		for(int i=0; i < newLength; i++){

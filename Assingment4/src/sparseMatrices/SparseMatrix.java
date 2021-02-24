@@ -41,26 +41,30 @@ public final class SparseMatrix {
 	public int getCols(){
 		return this.columns;
 	}
+	public Integer[][] getSparseMatrix(){
+		return this.sparseMatrix;
+	}
 	
-	private Integer[][] formMatrix(){
+	private static Integer[][] formMatrix(Integer[][] sparseMatrix ,int rows, int cols){
 		
-		int rows = this.getRows();
-		int cols = this.getCols();
+		int count = sparseMatrix.length;
+		
 		Integer [][] matrix = null;
 		
 		if(rows > 0 && cols > 0){
 			matrix = new Integer[rows][cols];
-			
+
 			for(int i=0; i < rows; i++){
 				for(int j=0; j < cols; j++){
 					matrix[i][j] = 0;
 				}
 			}
 		
-			for(int i=0; i < this.nonZeroCount; i++){
-				int r = this.sparseMatrix[i][0];
-				int c = this.sparseMatrix[i][1];
-				int value = this.sparseMatrix[i][2];
+			for(int i=0; i < count; i++){
+				
+				int r = sparseMatrix[i][0];
+				int c = sparseMatrix[i][1];
+				int value = sparseMatrix[i][2];
 			
 				matrix[r][c] = value;
 			}
@@ -72,15 +76,13 @@ public final class SparseMatrix {
 	
 	public Integer [][] transpose(){
 		
-		Integer [][] matrix = this.formMatrix();
 		Integer [][] transposeMatrix = null;
-		if(matrix != null && this.rows == this.columns){
-		
-			transposeMatrix = new Integer[this.rows][this.columns];
-			for(int i=0;i<this.rows; i++){
-				for(int j=0;j<this.columns;j++){
-					transposeMatrix[j][i] = matrix[i][j];
-				}
+		if(this.rows == this.columns){
+			transposeMatrix = new Integer[this.nonZeroCount][3];
+			for(int i=0;i<this.nonZeroCount; i++){
+				transposeMatrix[i][0] = this.sparseMatrix[i][1];
+				transposeMatrix[i][1] = this.sparseMatrix[i][0];
+				transposeMatrix[i][2] = this.sparseMatrix[i][2];
 			}
 		}
 		
@@ -88,8 +90,8 @@ public final class SparseMatrix {
 	}
 	public boolean isSymmetrical(){
 		
-		Integer[][] transposeMatrix = this.transpose();
-		Integer[][] matrix = this.formMatrix();
+		Integer[][] transposeMatrix = SparseMatrix.formMatrix(this.transpose(), this.rows, this.columns);
+		Integer[][] matrix = SparseMatrix.formMatrix(this.getSparseMatrix(),this.rows, this.columns);
 		
 		if(transposeMatrix != null && matrix != null){
 			for(int i = 0; i < this.rows; i++){
@@ -130,7 +132,6 @@ public final class SparseMatrix {
 		
 		
 		Integer[][] result = null;
-		
 		if(m1 != null && m2 != null){
 			int r1 = m1.length;
 			int c1 = m1[0].length;
@@ -160,6 +161,7 @@ public final class SparseMatrix {
                 };
 		SparseMatrix m = new SparseMatrix(6,sparseMatrix);
 		Integer[][] transpose = m.transpose();
+				
 	}
 
 }
